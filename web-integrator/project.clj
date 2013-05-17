@@ -1,4 +1,4 @@
-(defproject org.healthsciencessc.i2b2/webclient "0.1.0-SNAPSHOT"
+(defproject org.healthsciencessc.i2b2/web-integrator "0.1.0-SNAPSHOT"
   :description "Provides an integration layer to the i2b2 web client in order to provide additional functionality, such as SSO integration."
   
   :url "https://github.com/HSSC/i2b2-webclient"
