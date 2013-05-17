@@ -1,0 +1,22 @@
+div.dua-container {
+}
+
+div.dua-title {
+	padding: .5em 1em;
+	font-weight: bold;
+}
+
+div.dua-agreement {
+	border: 3px groove;
+	padding: 1em;
+	background-color: white;
+}
+
+div.dua-action {
+	padding: .5em 1em;
+	text-align: right;
+}
+
+div.dua-action a{
+	min-width: 7em;
+}

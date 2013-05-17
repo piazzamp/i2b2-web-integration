@@ -1,0 +1,28 @@
+a.webclient-action{
+	-webkit-border-image: none;
+	-webkit-box-shadow: rgba(0, 0, 0, 0.247059) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.298039) 0px 2px 0px 0px inset, rgba(0, 0, 0, 0.14902) 0px 1px 2px 0px;
+	-webkit-transition-delay: 0s;
+	-webkit-transition-duration: 0.1s;
+	-webkit-transition-property: box-shadow;
+	-webkit-transition-timing-function: linear;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	background-color: rgb(230, 230, 230);
+	background-image: linear-gradient(rgba(255, 255, 255, 0.298039), rgba(255, 255, 255, 0.14902) 40%, transparent);
+	border: none rgba(0, 0, 0, 0);
+	border-radius: 4px;
+	color: rgb(68, 68, 68);
+	cursor: pointer;
+	display: inline-block;
+	line-height: normal;
+	margin: 3px;
+	padding: .5em 1em;
+	text-align: center;
+	text-decoration: none;
+	transition-delay: 0s;
+	transition-duration: 0.1s;
+	transition-property: box-shadow;
+	transition-timing-function: linear;
+	vertical-align: baseline;
+	white-space: nowrap;
+}
