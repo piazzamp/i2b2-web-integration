@@ -2,8 +2,8 @@
   (:require [pliant.configure.props :as props]))
 
 (def ^:private ui-content (props/overlay-all-props 
-                            "i2b2/webclient.properties" 
-                            "i2b2/webclient-override.properties"))
+                            "i2b2-wci-text.properties" 
+                            "i2b2-wci-text-override.properties"))
 
 ;; Text Retrieval Functions
 (defn text
