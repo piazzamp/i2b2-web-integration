@@ -1,64 +1,58 @@
-# Installing I2B2 Web Client Integration Platform
+## Installing I2B2 Web Client Integration Platform
 
 The Web Client Integration (WCI) installation instructions provided make the following assumptions:
 
 * You have successfully installed I2B2 services on a JBoss server
 * You have successfully installed the default webclient on an Apache HTTPd server.
-* The URL to your I2B2 client has no path in it.
-* Your Apache HTTPd configuration for the I2B2 app is configured in a NamedVirtualHost
-* You define your SSO hooks within HTTPd configuration to not allow access to any of the application without being authenticated first.
 * You are using/installing I2B2 version 1.6.8.
-
-Any deviation from the assumptions requires the user to adjust the installation steps accordingly.
 
 ## Apache HTTPd Configuration
 
-```
-	NameVirtualHost *:80
+The Apache HTTPd configuration below makes only a few assumptions.  If any of those assumptions do not match your setup you will need to make changes accordingly.  The assumptions are:
 
-	<VirtualHost *:80>
-	    RewriteEngine on
-	    ReWriteCond %{SERVER_PORT} !^443$
-	    RewriteRule ^/(.*) https://%{HTTP_HOST}/$1 [NC,R,L]
-	</VirtualHost>
-	 
-	NameVirtualHost *:443
+* I2B2 is accessed at a root path.  IE, got to http://i2b2.my.org/ to access I2B2.  No context path.
+* Access to I2B2 must be over HTTPS.
 
-	<VirtualHost *:443>
-	    # ------------------------------------------------------------------------------------ #
-	    # Virtual Server Basic Configuration - Assumes SSL Is Installed
-	    # ------------------------------------------------------------------------------------ #
-		ServerName i2b2.faber.edu
-		DocumentRoot "/path/to/webclient"
+Configuration:
 
-	    # ------------------------------------------------------------------------------------ #
-	    # SSO Configuration - Using Shibboleth Here
-	    # ------------------------------------------------------------------------------------ #
-		AuthType shibboleth
-		ShibRequestSetting requireSession 1
-		require valid-user
-		ShibUseHeaders On
-		ShibUseEnvironment Off
+    # ------------------------------------------------------------------------------------ #
+    # Apache Virtual Host Mappings For I2B2 Web Client & Integration Platform
+    # ------------------------------------------------------------------------------------ #
+    NameVirtualHost *:80
+    <VirtualHost *:80>
+        # ------------------------------------------------------------------------------------ #
+    	# Redirect All HTTP Requests To HTTPS
+    	# ------------------------------------------------------------------------------------ #
+    	ServerName i2b2.faber.edu
+    	Redirect permanent / https://i2b2.faber.edu/
+    </VirtualHost>
+    
+    NameVirtualHost *:443
+    <VirtualHost *:443>
+        # ------------------------------------------------------------------------------------ #
+        # Virtual Server Basic Configuration
+        # ------------------------------------------------------------------------------------ #
+        ServerName i2b2.faber.edu
+        DocumentRoot "/path/to/webclient"
+    
+        # ------------------------------------------------------------------------------------ #
+        # SSO & SSL Configuration Here
+        # ------------------------------------------------------------------------------------ #
+        REPLACE ME WITH REAL STUFF
+        
+        # ------------------------------------------------------------------------------------ #
+        # Proxy Configuration
+        # ------------------------------------------------------------------------------------ #
+        ProxyPass /assets !
+        ProxyPass /help !
+        ProxyPass /js-ext !
+        ProxyPass /js-i2b2 !
+        ProxyPass /viewer.htm !
+        ProxyPass /i2b2_config_data.js !
+        ProxyPass /index.php !
+        ProxyPass / ajp://i2b2jboss.faber.edu:8009/
+    </VirtualHost>
 
-		<Directory "/path/to/webclient" >
-		  Order Allow,Deny
-		  Allow from all
-		</Directory>
-
-	    # ------------------------------------------------------------------------------------ #
-	    # Proxy Configuration
-	    # ------------------------------------------------------------------------------------ #
-		ProxyPass /assets !
-		ProxyPass /help !
-		ProxyPass /js-ext !
-		ProxyPass /js-i2b2 !
-		ProxyPass /viewer.htm !
-		ProxyPass /i2b2_config_data.js !
-		ProxyPass /index.php !
-		ProxyPass / ajp://i2b2jboss.faber.edu:8009/
-
-	</VirtualHost>
-```
 
 ## Default Web Client Integration
 
@@ -73,6 +67,7 @@ We do not want the HTTPd server to redirect from any path to the view automatica
 The WCI provides a dynamically generated script that contains the integration hooks for the webclient.  That script needs to be injected into the viewer.htm file to provide the integration.  To inject, a script tag needs to be added immediately after the call to the ``js-i2b2/i2b2_loader.js`` script call. 
 
 Original HTML markup before adding the script (Starting at line 156 in I2b2 version 1.6.8):
+
 ```html
 	<!-- load i2b2 framework -->
 	<script type="text/javascript" src="js-i2b2/i2b2_loader.js"></script>
@@ -81,6 +76,7 @@ Original HTML markup before adding the script (Starting at line 156 in I2b2 vers
 ```
 
 Modified HTML markup after adding the script:
+
 ```html
 	<!-- load i2b2 framework -->
 	<script type="text/javascript" src="js-i2b2/i2b2_loader.js"></script>
@@ -98,6 +94,7 @@ While the script ``scripts/webclient/bootstrap.js``  contains the integration lo
 The first hook to intercept normal operations is a call prior to I2B2 initializing itself.
 
 Original JavaScript before adding the hook  (Starting at line 241 in I2b2 version 1.6.8):
+
 ```javascript
 	function init() {
 		// ------------------------------------------------------
@@ -152,6 +149,7 @@ Original JavaScript before adding the hook  (Starting at line 173 in I2b2 versio
 ```
 
 Modified JavaScript after adding the hook  (Starting at line 173 in I2b2 version 1.6.8):
+
 ```javascript
 	function initI2B2() 
 	{
@@ -182,6 +180,7 @@ Modified JavaScript after adding the hook  (Starting at line 173 in I2b2 version
 The last hook to intercept normal operations is a call after the login process is successful:
 
 Original JavaScript before adding the hook  (Insert at line 238 in I2b2 version 1.6.8):
+
 ```javascript
 function initI2B2() 
 {
@@ -192,6 +191,7 @@ function initI2B2()
 ```
 
 Modified JavaScript after adding the hook  (Insert at line 238 in I2b2 version 1.6.8):
+
 ```javascript
 function initI2B2() 
 {
@@ -201,3 +201,9 @@ function initI2B2()
 	i2b2.Init();
 }
 ```
+
+## License
+
+Copyright © 2013 Health Sciences of South Carolina
+
+Distributed under the Eclipse Public License, the same as Clojure.
