@@ -20,5 +20,4 @@
   :package {:autobuild true :reuse true}
   
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [pliant/configure "0.1.1"]
                  [pliant/process "0.1.0"]])

@@ -36,6 +36,6 @@
                  [org.clojure/java.jdbc "0.2.3"]
                  [org.clojure/data.json "0.2.2"]]
   
-  :profiles {:all {:dependencies [#_[org.healthsciencessc.i2b2/shibboleth "0.1.0-SNAPSHOT"]
+  :profiles {:all {:dependencies [[org.healthsciencessc.i2b2/shibboleth "0.1.0-SNAPSHOT"]
                                   [org.healthsciencessc.i2b2/usage-agreement "0.1.0-SNAPSHOT"]
                                   [org.healthsciencessc.i2b2/user-registration "0.1.0-SNAPSHOT"]]}})
