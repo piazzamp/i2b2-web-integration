@@ -25,15 +25,15 @@
 
 ;; The 'commonname.header' is the name of the property to find that name of the shibboleth attribute
 ;; that contains the full common name of the person.
-(def commonname-header (str prefix (config/lookup :plugin.shibboleth.name.header config "shib-person-commonname")))
+(def commonname-header (str prefix (config/lookup :plugin.shibboleth.name.header "shib-person-commonname")))
 
 ;; The 'firstname.header' is the name of the property to find that name of the shibboleth attribute
 ;; that contains the first name of the person being authorized.
-(def firstname-header (str prefix (config/lookup :plugin.shibboleth.firstname.header config "shib-inetorgperson-givenname")))
+(def firstname-header (str prefix (config/lookup :plugin.shibboleth.firstname.header "shib-inetorgperson-givenname")))
 
 ;; The 'lastname.header' is the name of the property to find that name of the shibboleth attribute
 ;; that contains the last name of the person being authorized.
-(def lastname-header (str prefix (config/lookup :plugin.shibboleth.lastname.header config "shib-person-surname")))
+(def lastname-header (str prefix (config/lookup :plugin.shibboleth.lastname.header "shib-person-surname")))
 
 ;; Provides a shibboleth implementation layer to obtain the requestors credentials from the 
 ;; shibboleth attributes available within the request.  This requires that any call into 
