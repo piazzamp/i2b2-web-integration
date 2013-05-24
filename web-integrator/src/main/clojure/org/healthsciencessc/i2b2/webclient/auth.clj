@@ -1,10 +1,10 @@
 (ns org.healthsciencessc.i2b2.webclient.auth
-  (:require [org.healthsciencessc.i2b2.webclient.respond :as respond] 
+  (:require [clojure.java.jdbc :as jdbc]
+            [org.healthsciencessc.i2b2.webclient.config :as config]
+            [org.healthsciencessc.i2b2.webclient.respond :as respond] 
             [pliant.webpoint.common :as common]
             [ring.util.response :as response]
-            [sandbar.stateful-session :as sandbar]
-            [clojure.java.jdbc :as jdbc]
-            [clojure.tools.logging :as logging])
+            [sandbar.stateful-session :as sandbar])
   (:use     [pliant.process :only [defprocess]]))
 
 
@@ -30,10 +30,11 @@
                          (.update (.getBytes value)))))))
 
 
-;; The database configuration for accessing user and role records.  Utilizes the 
-;; built in PM DataSource.
-;;(def pm-db {:name "java:comp/env/PMBootStrapDS"})
-(def pm-db {:name "java:PMBootStrapDS"})
+;; The database connection definition for the Project Management database.  By default, 
+;; the datastore configured on JBoss for the PM module is used, but have givent the 
+;; ability to set the name of a different datastore to use in the WCI properties 
+;; file.
+(def pm-db {:name (config/lookup :pm.database.name "java:PMBootStrapDS")})
 
 (def select-user-sql 
   "SELECT USER_ID as \"user-id\", 
