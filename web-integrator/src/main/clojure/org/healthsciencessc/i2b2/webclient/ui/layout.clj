@@ -2,7 +2,7 @@
   (:require [hiccup.page :as page]
             [hiccup.core :as hcup]
             [org.healthsciencessc.i2b2.webclient.auth :as auth])
-  (:use     [pliant.process :only [defprocess deflayer continue before]]))
+  (:use     [pliant.process :only [defprocess deflayer continue]]))
 
 
 (defprocess scripts
@@ -52,35 +52,35 @@
 
 (defprocess header
   "Creates the default header that is used for the application when in an authenticated session."
-  [request options]  
+  [request options]
   [:table#topBarTable {:border 0 :cellspacing 0 :cellpadding 0 :width"100%"}
    [:tr
-    [:td {:align "left" :valign "middle"} 
+    [:td {:align "left" :valign "middle"}
      [:img#topBarTitle {:src "/assets/images/title.gif" :border 0}]]
-    [:td {:align "left" :valign "middle"} 
+    [:td {:align "left" :valign "middle"}
      [:div#viewMode-Project]]
-    [:td {:align "right" :valign "middle"} 
+    [:td {:align "right" :valign "middle"}
      [:div#viewMode-User (:full-name (auth/get-user))]]
-    [:td {:align "right" :valign "middle"} 
-     [:div#topBar 
+    [:td {:align "right" :valign "middle"}
+     [:div#topBar
       (interpose "&nbsp;|&nbsp;" (map #([:a {:href (first %)} (second %)]) (:links options)))
       "&nbsp;|&nbsp;"
       [:a {:href "/logout"} "Logout"]]]]])
 
 (defprocess header-no-session
   "Creates the default header that is used for the application when not in an authenticated session."
-  [request options]  
+  [request options]
   [:table#topBarTable {:border 0 :cellspacing 0 :cellpadding 0 :width"100%"}
    [:tr
-    [:td {:align "left" :valign "middle"} 
+    [:td {:align "left" :valign "middle"}
      [:img#topBarTitle {:src "/assets/images/title.gif" :border 0}]]
-    [:td {:align "right" :valign "middle"} 
-     [:div#topBar 
-      (interpose "&nbsp;|&nbsp;" 
-                 (map 
-                   (fn[link] [:a {:href (first link)} (second link)]) 
+    [:td {:align "right" :valign "middle"}
+     [:div#topBar
+      (interpose "&nbsp;|&nbsp;"
+                 (map
+                   (fn[link] [:a {:href (first link)} (second link)])
                    (:links options)))]]]])
- 
+
 (defprocess footer
   "Creates the default footer that is used for the application when in an authenticated session."
   [request options])
@@ -156,8 +156,8 @@
     (body-no-session request options elements)))
 
 (defprocess render-page
-  "Decides how markup should be wrapped in a container.  This provides 
-   the ability to add additional containers later based on how the 
+  "Decides how markup should be wrapped in a container.  This provides
+   the ability to add additional containers later based on how the
    request was made.  IE - make into a portlet."
   [request options & elements]
   (page-layout request options elements))
