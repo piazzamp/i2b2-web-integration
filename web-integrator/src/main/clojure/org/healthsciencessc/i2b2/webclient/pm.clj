@@ -64,7 +64,7 @@
   "Gets a user by it's ID."
   [id]
   (jdbc/with-connection pm-db
-    (jdbc/with-query-results rs [(str sql-select-users " WHERE USER_ID=?") id]
+    (jdbc/with-query-results rs [(str sql-select-users " WHERE LOWER(USER_ID)=?") (clojure.string/lower-case id)]
       (first rs))))
 
 (defn projects
