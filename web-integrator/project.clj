@@ -27,9 +27,9 @@
          :port 8081}
   
   :dependencies [[org.clojure/clojure "1.4.0"]
-                 [pliant/configure "0.1.2-SNAPSHOT"]
-                 [pliant/process "0.1.1-SNAPSHOT"]
-                 [pliant/webpoint "0.1.1-SNAPSHOT"]
+                 [pliant/configure "0.1.2"]
+                 [pliant/process "0.1.1"]
+                 [pliant/webpoint "0.1.0"]
                  [hiccup "1.0.0"]
                  [sandbar "0.4.0-SNAPSHOT"]
                  [org.clojure/tools.logging "0.2.3"]
