@@ -4,7 +4,7 @@ The shibboleth plugin provides single sign-on capabilities with the [Shibboleth 
 
 ## Deployment
 
-To deploy the plugin, either embed it into the web-integrator WAR during it's build process, or drop the generated JAR onto into the ``lib`` directory on the JBoss server.  This plugin relies on the [user-registration](../user-registration/README.md) plugin.  If you are deploying this to the application server classpath, you must deploy the user-registration jar as well.
+To deploy the plugin, either embed it into the web-integrator WAR during it's build process, or drop the generated JAR onto into the ``lib`` directory on the JBoss server.  This plugin relies on the [user-management](../user-management/README.md) plugin.  If you are deploying this to the application server classpath, you must deploy the user-management jar as well.
 
 ## Configuration
 

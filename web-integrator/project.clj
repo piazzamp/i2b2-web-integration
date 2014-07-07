@@ -38,4 +38,4 @@
   
   :profiles {:all {:dependencies [[org.healthsciencessc.i2b2/shibboleth "0.1.0-SNAPSHOT"]
                                   [org.healthsciencessc.i2b2/usage-agreement "0.1.0-SNAPSHOT"]
-                                  [org.healthsciencessc.i2b2/user-registration "0.1.0-SNAPSHOT"]]}})
+                                  [org.healthsciencessc.i2b2/user-management "0.1.0-SNAPSHOT"]]}})
