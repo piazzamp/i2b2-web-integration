@@ -1,7 +1,8 @@
 (ns org.healthsciencessc.i2b2.webclient.shibboleth
   (:require [clojure.tools.logging :as logging]
             [org.healthsciencessc.i2b2.webclient.config :as config]
-            [org.healthsciencessc.i2b2.webclient.auth :as auth])
+            [org.healthsciencessc.i2b2.webclient.auth :as auth]
+	    [clojure.tools.logging :as logging])
   (:use     [pliant.process :only [deflayer]]))
 
 
@@ -12,7 +13,8 @@
 
 ;; The 'userid.header' is the name of the property to find that name of the shibboleth attribute
 ;; that contains the value to match as the I2B2 User ID.
-(def userid-header (str prefix (config/lookup :plugin.shibboleth.userid.header "shib-eduperson-principal-name")))
+(def userid-header (str prefix (config/lookup :plugin.shibboleth.userid.header "shib-eduperson-principal-name"))
+	(logging/debug (str "User ID grabbed from header: " (get-in request [:headers userid-header]))))
 
 ;; The 'session.header' is the name of the property to find that name of the shibboleth attribute
 ;; that contains the value to use as the password for the current session.  Due to how an SSO 
