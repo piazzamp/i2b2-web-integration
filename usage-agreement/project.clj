@@ -22,4 +22,5 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [pliant/configure "0.1.2"]
                  [pliant/process "0.1.2"]
-                 [sandbar "0.4.0-SNAPSHOT"]])
+                 [sandbar "0.4.0-SNAPSHOT"]
+		 [org.clojure/tools.logging "0.2.3"]])

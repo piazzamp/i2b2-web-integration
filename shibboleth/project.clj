@@ -21,4 +21,4 @@
   
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [pliant/process "0.1.0"]
-		 [org.clojure/tools.loggin "0.2.3"]])
+		 [org.clojure/tools.logging "0.2.3"]])
