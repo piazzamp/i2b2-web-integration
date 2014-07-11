@@ -15,7 +15,7 @@
 (def agreement-text (let [resource (clojure.java.io/resource "i2b2-usage-agreement.htm")]
                       (if resource
                         (slurp resource))))
-(if agreement-text (logging/info "i2b2-usage-agreement.htm located!!!!!") ("i2b2-usage-agreement.htm not found!!!"))
+(if (> (count agreement-text) 10) (logging/info "i2b2-usage-agreement.htm located!!!!!") (logging/info "i2b2-usage-agreement.htm not found!!!"))
 
 (defn agree
   "Saves the provided data as the current user of the session.  Does not do any validation."
@@ -37,6 +37,7 @@
 ;; is has a path starting with /unauthorized.
 (deflayer home/view-home view-home-usage-agreement
   [request]
+  (logging/info "entering deflayer home/view-home view-home-usage-agreement")
   (if (requires-agreement?)
     (let [user (auth/get-user)]
       (layout/render-page request {:title (text/text :plugin.usage-agreement.title)
