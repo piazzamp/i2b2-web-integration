@@ -8,12 +8,14 @@
             [org.healthsciencessc.i2b2.webclient.text :as text]
             [sandbar.stateful-session :as sandbar]
             [pliant.webpoint.request :as endpoint]
-            [pliant.process :refer [defprocess deflayer as-method continue callback]]))
+            [pliant.process :refer [defprocess deflayer as-method continue callback]]
+            [clojure.tools.logging :as logging]))
 
 
 (def agreement-text (let [resource (clojure.java.io/resource "i2b2-usage-agreement.htm")]
                       (if resource
                         (slurp resource))))
+(if agreement-text (logging/info "i2b2-usage-agreement.htm located!!!!!") ("i2b2-usage-agreement.htm not found!!!"))
 
 (defn agree
   "Saves the provided data as the current user of the session.  Does not do any validation."

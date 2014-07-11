@@ -12,8 +12,7 @@
 
 ;; The 'userid.header' is the name of the property to find that name of the shibboleth attribute
 ;; that contains the value to match as the I2B2 User ID.
-(def userid-header (str prefix (config/lookup :plugin.shibboleth.userid.header "shib-eduperson-principal-name"))
-	(logging/info (str "User ID grabbed from header: " (get-in request [:headers userid-header]))))
+(def userid-header (str prefix (config/lookup :plugin.shibboleth.userid.header "shib-eduperson-principal-name")))
 
 ;; The 'session.header' is the name of the property to find that name of the shibboleth attribute
 ;; that contains the value to use as the password for the current session.  Due to how an SSO 
