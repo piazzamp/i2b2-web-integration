@@ -4,7 +4,9 @@ The usage-agreement plugin provides the ability to force users to agree to a usa
 
 ## Deployment
 
-To deploy the plugin, either embed it into the web-integrator WAR during it's build process, or drop the generated JAR onto into the ``lib`` directory on the JBoss server.
+To deploy the plugin, either embed it into the web-integrator WAR during it's build process, or drop the generated JAR onto into the ``lib`` directory on the JBoss 4 server.
+
+In JBoss AS 7, you must add a module to ``<jboss home>/modules``, add the html to that module and declare that module as a dependency in ``wci.war/META-INF/MANIFEST.MF``. Check out the [JBoss guide](https://community.jboss.org/wiki/HowToPutAnExternalFileInTheClasspath).
 
 ## Configuration
 
