@@ -15,7 +15,7 @@
 (def agreement-text (let [resource (clojure.java.io/resource "i2b2-usage-agreement.htm")]
                       (if resource
                         (slurp resource))))
-(if (> (count agreement-text) 10) (logging/info "i2b2-usage-agreement.htm located!!!!!") (logging/info "i2b2-usage-agreement.htm not found!!!"))
+(if (> (count agreement-text) 10) (logging/info (apply str (concat "i2b2-usage-agreement.htm located!!!!! size=" (str (count agreement-text))))) (logging/info "i2b2-usage-agreement.htm not found!!!"))
 
 (defn agree
   "Saves the provided data as the current user of the session.  Does not do any validation."
@@ -31,13 +31,14 @@
   []
   (and (not (nil? agreement-text)) (not (agreed?))))
 
+(if (requires-agreement?) (logging/info "requires-agreement?=true") (logging/info "requires-agreement?=false"))
+
 ;; Provides a shibboleth implementation layer to obtain the requestors credentials from the 
 ;; shibboleth attributes available within the request.  This requires that any call into 
 ;; the client must already have been authenticated through shibboleth, unless the request 
 ;; is has a path starting with /unauthorized.
 (deflayer home/view-home view-home-usage-agreement
   [request]
-  (logging/info "entering deflayer home/view-home view-home-usage-agreement")
   (if (requires-agreement?)
     (let [user (auth/get-user)]
       (layout/render-page request {:title (text/text :plugin.usage-agreement.title)
