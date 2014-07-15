@@ -10,7 +10,7 @@
 (defprocess view-home
   "Provides a placeholder to the root path.  By default, this will just redirect to the viewer.htm page"
   [request]
-  (respond/redirect request "/viewer.htm") 
+  (do (logging/info "view-home process called") (respond/redirect request "/viewer.htm")) 
   )
 
 (as-method view-home endpoint/endpoints "get")

@@ -28,6 +28,7 @@
 
 (defn requires-agreement?
   []
+  (logging/info "requires-agreement? called; could be from the UA layer or prereq check")
   (and (not (nil? agreement-text)) (not (agreed?))))
 
 ;; Provides a shibboleth implementation layer to obtain the requestors credentials from the 
@@ -38,7 +39,8 @@
   [request]
   (if (requires-agreement?)
     (let [user (auth/get-user)]
-      (layout/render-page request {:title (text/text :plugin.usage-agreement.title)
+     (logging/info "inside the DUA layer")
+     (layout/render-page request {:title (text/text :plugin.usage-agreement.title)
                                    :usage-agreement true}
                           [:div.dua-container
                            [:div.dua-title (text/text :plugin.usage-agreement.message)]
