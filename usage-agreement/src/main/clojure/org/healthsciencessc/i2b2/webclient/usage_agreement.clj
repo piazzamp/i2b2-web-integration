@@ -28,8 +28,8 @@
 
 (defn requires-agreement?
   []
-  (logging/info "requires-agreement? called; could be from the UA layer or prereq check")
-  (and (not (nil? agreement-text)) (not (agreed?))))
+  (do (logging/info (str "requires-agreement? called; could be from the UA layer or prereq check: " (and (not (nil? agreement-text)) (not (agreed?)))))
+  (and (not (nil? agreement-text)) (not (agreed?)))) )
 
 ;; Provides a shibboleth implementation layer to obtain the requestors credentials from the 
 ;; shibboleth attributes available within the request.  This requires that any call into 
@@ -38,8 +38,7 @@
 (deflayer home/view-home view-home-usage-agreement
   [request]
   (if (requires-agreement?)
-    (let [user (auth/get-user)]
-     (logging/info "inside the DUA layer")
+    (let [user (auth/get-user)] 
      (layout/render-page request {:title (text/text :plugin.usage-agreement.title)
                                    :usage-agreement true}
                           [:div.dua-container
@@ -52,7 +51,9 @@
                                                 (text/text :plugin.usage-agreement.consent.label))
                             ]]))
     (continue)))
-  
+
+;;(as-method view-home-usage-agreement endpoint/endpoints "get-test-ua")
+
 ;; A simple api for accepting the agreement fram a user
 (defprocess api-usage-agreement
   "Generates the unauthorized page."

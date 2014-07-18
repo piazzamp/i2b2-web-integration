@@ -26,7 +26,7 @@
   (let [user-id (:user-id credentials)
         password (:provisional-password credentials)]
     (if (and user-id password)
-      (if-let [user (pm/user user-id)]
+      (if-let [user (pm/user user-id)]  ;;could collapse into a when-let
         (do
           (pm/change-password user-id password)
           (assoc user :password password :roles
@@ -55,7 +55,7 @@
   "Attempts to authenticate the current session by using the request to find valid credentials."
   ([request]
     (let [user (credentials->user (request->credentials request))]
-      (if user
+      (if user  ;;consider replacing with when
         (do
           (set-user user)
           user)))))
