@@ -13,7 +13,7 @@
   :jar-exclusions [#"^\." #"^*\/\." #"\.java$" #"project\.clj"]
   
   :plugins [[lein-package "2.0.1"]
-            [lein-ring "0.8.3"]]
+            [lein-ring "0.8.11"]]
   
   :hooks [leiningen.package.hooks.deploy 
           leiningen.package.hooks.install]
